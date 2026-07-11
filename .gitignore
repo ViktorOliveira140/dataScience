@@ -1,0 +1,13 @@
+# Ambientes locais
+.venv/
+venv/
+
+# Artefatos Python
+__pycache__/
+*.pyc
+
+# Dados e artefatos gerados
+data/
+*.csv
+*.parquet
+*.pkl

@@ -17,7 +17,7 @@ A base foi pensada para refletir sinais que costumam existir em sistemas comuns 
 - atendimento;
 - indicadores simples de rede.
 
-O projeto já conta com uma base sintética plausível, um dicionário de dados claro, uma análise exploratória inicial, um dashboard simples e um baseline interpretável para churn voluntário.
+O projeto já conta com uma base sintética plausível, um dicionário de dados claro, uma análise exploratória inicial, um dashboard simples, um baseline interpretável para churn voluntário e uma primeira comparação com modelo baseado em árvores.
 
 ## Limites desta versão
 
@@ -36,7 +36,8 @@ Nesta fase, o projeto já inclui:
 - gerador reproduzível do dataset sintético;
 - análise exploratória inicial em notebook;
 - dashboard inicial em Streamlit;
-- modelo baseline com regressão logística.
+- modelo baseline com regressão logística;
+- comparação inicial com Random Forest.
 
 ## Instalação
 
@@ -100,6 +101,18 @@ Depois abra o arquivo `notebooks/02_modeling_baseline.ipynb`.
 
 O baseline usa regressão logística e compara o resultado com uma referência ingênua que prevê sempre a classe majoritária. A análise também mostra por que a acurácia isolada é insuficiente para avaliar churn, já que o cancelamento voluntário é um evento minoritário.
 
+## Comparação de modelos
+
+Para abrir o notebook de comparação, use:
+
+```bash
+jupyter lab
+```
+
+Depois abra o arquivo `notebooks/03_model_comparison.ipynb`.
+
+Essa etapa compara a regressão logística com uma Random Forest. A comparação não define um modelo pronto para produção; ela serve para avaliar trade-offs entre simplicidade, interpretação, falsos positivos, recall e priorização por ranking.
+
 ## Validação
 
 O gerador valida a estrutura do dataset antes de salvar o arquivo. As validações cobrem quantidade de linhas, colunas esperadas, tipos, categorias, faixas, ausência de nulos e regras básicas de consistência.
@@ -114,5 +127,5 @@ pytest
 
 As próximas etapas previstas são:
 
-- comparação com um segundo modelo;
+- análise dos cenários de priorização;
 - uma apresentação simples dos resultados.

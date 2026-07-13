@@ -8,7 +8,7 @@ O foco aqui não é construir algo grande ou sofisticado logo de início. A prio
 
 Como este trabalho começou sem uso de bases internas, a primeira versão utiliza apenas dados sintéticos. Isso permite estruturar o problema, testar hipóteses e desenhar uma abordagem inicial sem expor informações reais de clientes.
 
-Cada linha do dataset representa a situação de um cliente em uma data de referência. A variável-alvo da primeira versão é `churn_90d`, que indica se houve cancelamento nos 90 dias seguintes.
+Cada linha do dataset representa a situação de um cliente em uma data de referência. A variável-alvo da primeira versão é `churn_90d`, que indica se houve cancelamento voluntário nos 90 dias seguintes.
 
 A base foi pensada para refletir sinais que costumam existir em sistemas comuns de operação, como:
 
@@ -23,27 +23,59 @@ O objetivo desta fase é preparar uma base sintética plausível, um dicionário
 
 Os dados deste repositório são sintéticos. Eles não representam clientes reais, não devem ser tratados como evidência de desempenho em produção e não substituem uma validação futura com dados internos, critérios de governança e recorte temporal adequado.
 
+As proporções usadas no gerador, incluindo a inadimplência simulada, são hipóteses para demonstração. Elas não representam taxas reais da empresa.
+
 Além disso, este projeto não parte da premissa de que correlação significa causalidade. A proposta é apoiar análise e priorização, não automatizar decisões de retenção de forma isolada.
 
 ## Estrutura inicial
 
 A estrutura pública será mantida simples no começo, com documentação objetiva e espaço para evolução gradual do código e das análises.
 
-Na fase seguinte, o projeto deve incorporar:
+Nesta fase, o projeto já inclui um gerador reproduzível para criar a primeira versão do dataset sintético.
 
-- geração reproduzível do dataset sintético;
-- validações básicas da base;
+## Instalação
+
+Crie um ambiente virtual e instale as dependências:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+## Geração do dataset
+
+Para gerar o dataset com os padrões da V1, use:
+
+```bash
+python src/generate_dataset.py
+```
+
+Esse comando cria o arquivo `data/customers_churn_synthetic.csv` com 5.000 clientes e seed 42.
+
+Também é possível informar a quantidade de clientes, a seed e o caminho de saída:
+
+```bash
+python src/generate_dataset.py --n-customers 10000 --seed 123 --output data/customers_churn_synthetic.csv
+```
+
+O diretório `data/` é usado para arquivos gerados e não deve ser versionado por padrão.
+
+## Validação
+
+O gerador valida a estrutura do dataset antes de salvar o arquivo. As validações cobrem quantidade de linhas, colunas esperadas, tipos, categorias, faixas, ausência de nulos e regras básicas de consistência.
+
+Para executar os testes automatizados:
+
+```bash
+pytest
+```
+
+## Próximos passos
+
+As próximas etapas previstas são:
+
 - análise exploratória;
 - modelo baseline interpretável;
 - comparação com um segundo modelo;
 - uma apresentação simples dos resultados.
-
-## Próximos passos
-
-Os próximos passos previstos são:
-
-1. fechar o dicionário de dados da primeira versão;
-2. implementar o gerador sintético com regras reproduzíveis;
-3. validar tipos, faixas e consistência da base;
-4. realizar a análise exploratória inicial;
-5. treinar um baseline simples para estimativa de churn.

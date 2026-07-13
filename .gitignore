@@ -5,6 +5,7 @@ venv/
 # Artefatos Python
 __pycache__/
 *.pyc
+.pytest_cache/
 
 # Dados e artefatos gerados
 data/

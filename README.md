@@ -17,7 +17,7 @@ A base foi pensada para refletir sinais que costumam existir em sistemas comuns 
 - atendimento;
 - indicadores simples de rede.
 
-O objetivo desta fase é preparar uma base sintética plausível, um dicionário de dados claro e a estrutura inicial do projeto. A partir disso, o próximo passo será analisar o comportamento da carteira, construir um baseline interpretável e avaliar se os sinais escolhidos ajudam de fato a separar perfis de maior e menor risco.
+O projeto já conta com uma base sintética plausível, um dicionário de dados claro, uma análise exploratória inicial e um dashboard simples. A próxima etapa é construir um baseline interpretável e avaliar se os sinais escolhidos ajudam de fato a separar perfis de maior e menor risco.
 
 ## Limites desta versão
 
@@ -101,7 +101,6 @@ pytest
 
 As próximas etapas previstas são:
 
-- análise exploratória;
 - modelo baseline interpretável;
 - comparação com um segundo modelo;
 - uma apresentação simples dos resultados.

@@ -6,6 +6,7 @@ venv/
 __pycache__/
 *.pyc
 .pytest_cache/
+.ipynb_checkpoints/
 
 # Dados e artefatos gerados
 data/

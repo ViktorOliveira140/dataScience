@@ -31,7 +31,11 @@ Além disso, este projeto não parte da premissa de que correlação significa c
 
 A estrutura pública será mantida simples no começo, com documentação objetiva e espaço para evolução gradual do código e das análises.
 
-Nesta fase, o projeto já inclui um gerador reproduzível para criar a primeira versão do dataset sintético.
+Nesta fase, o projeto já inclui:
+
+- gerador reproduzível do dataset sintético;
+- análise exploratória inicial em notebook;
+- dashboard inicial em Streamlit.
 
 ## Instalação
 
@@ -44,6 +48,8 @@ pip install -r requirements.txt
 ```
 
 ## Geração do dataset
+
+O dataset deve ser gerado antes da análise exploratória e do dashboard.
 
 Para gerar o dataset com os padrões da V1, use:
 
@@ -60,6 +66,26 @@ python src/generate_dataset.py --n-customers 10000 --seed 123 --output data/cust
 ```
 
 O diretório `data/` é usado para arquivos gerados e não deve ser versionado por padrão.
+
+## Análise exploratória
+
+Para abrir o notebook da análise exploratória, use:
+
+```bash
+jupyter lab
+```
+
+Depois abra o arquivo `notebooks/01_eda.ipynb`.
+
+## Dashboard
+
+Para executar o dashboard inicial, use:
+
+```bash
+streamlit run src/app.py
+```
+
+O dashboard lê o arquivo `data/customers_churn_synthetic.csv`. Se o dataset ainda não existir, gere-o primeiro com `python src/generate_dataset.py`.
 
 ## Validação
 

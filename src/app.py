@@ -4,7 +4,8 @@ import pandas as pd
 import streamlit as st
 
 
-DATA_PATH = Path("data/customers_churn_synthetic.csv")
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+DATA_PATH = PROJECT_ROOT / "data" / "customers_churn_synthetic.csv"
 
 COLUMN_LABELS = {
     "customer_id": "ID técnico do cliente",
@@ -44,6 +45,11 @@ def add_analysis_columns(dataframe: pd.DataFrame) -> pd.DataFrame:
         data["network_outage_hours_30d"],
         bins=[-1, 0, 2, 6, 12, 72],
         labels=["0", "0-2", "2-6", "6-12", "12+"],
+    )
+    data["overdue_invoice_count_band"] = pd.cut(
+        data["overdue_invoice_count"],
+        bins=[-1, 0, 1, 2, 8],
+        labels=["0", "1", "2", "3+"],
     )
 
     return data
@@ -111,6 +117,13 @@ st.info(
     "Os dados são sintéticos e não representam taxas reais da empresa. "
     "As diferenças apresentadas indicam associação, não causalidade."
 )
+
+if not DATA_PATH.exists():
+    st.error(
+        "Dataset sintético não encontrado. Gere o arquivo antes de abrir o dashboard."
+    )
+    st.code("python src/generate_dataset.py", language="bash")
+    st.stop()
 
 df = add_analysis_columns(load_data(DATA_PATH))
 
@@ -182,7 +195,7 @@ with col1:
     show_churn_section(
         "Churn por faturas vencidas",
         df,
-        "overdue_invoice_count",
+        "overdue_invoice_count_band",
         "Faturas vencidas",
     )
 
@@ -204,6 +217,7 @@ preview = df.drop(
         "has_active_agreement",
         "support_tickets_band",
         "network_outage_hours_band",
+        "overdue_invoice_count_band",
     ]
 ).rename(columns=COLUMN_LABELS)
 

@@ -17,7 +17,7 @@ A base foi pensada para refletir sinais que costumam existir em sistemas comuns 
 - atendimento;
 - indicadores simples de rede.
 
-O projeto já conta com uma base sintética plausível, um dicionário de dados claro, uma análise exploratória inicial e um dashboard simples. A próxima etapa é construir um baseline interpretável e avaliar se os sinais escolhidos ajudam de fato a separar perfis de maior e menor risco.
+O projeto já conta com uma base sintética plausível, um dicionário de dados claro, uma análise exploratória inicial, um dashboard simples e um baseline interpretável para churn voluntário.
 
 ## Limites desta versão
 
@@ -35,7 +35,8 @@ Nesta fase, o projeto já inclui:
 
 - gerador reproduzível do dataset sintético;
 - análise exploratória inicial em notebook;
-- dashboard inicial em Streamlit.
+- dashboard inicial em Streamlit;
+- modelo baseline com regressão logística.
 
 ## Instalação
 
@@ -87,6 +88,18 @@ streamlit run src/app.py
 
 O dashboard lê o arquivo `data/customers_churn_synthetic.csv`. Se o dataset ainda não existir, gere-o primeiro com `python src/generate_dataset.py`.
 
+## Modelo baseline
+
+Para abrir o notebook do modelo baseline, use:
+
+```bash
+jupyter lab
+```
+
+Depois abra o arquivo `notebooks/02_modeling_baseline.ipynb`.
+
+O baseline usa regressão logística e compara o resultado com uma referência ingênua que prevê sempre a classe majoritária. A análise também mostra por que a acurácia isolada é insuficiente para avaliar churn, já que o cancelamento voluntário é um evento minoritário.
+
 ## Validação
 
 O gerador valida a estrutura do dataset antes de salvar o arquivo. As validações cobrem quantidade de linhas, colunas esperadas, tipos, categorias, faixas, ausência de nulos e regras básicas de consistência.
@@ -101,6 +114,5 @@ pytest
 
 As próximas etapas previstas são:
 
-- modelo baseline interpretável;
 - comparação com um segundo modelo;
 - uma apresentação simples dos resultados.

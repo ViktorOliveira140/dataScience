@@ -3,3 +3,4 @@ pandas>=2.2,<3
 pytest>=8,<9
 streamlit>=1.59,<2
 jupyterlab>=4,<5
+scikit-learn>=1.4,<2
